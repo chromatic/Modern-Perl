@@ -1,8 +1,12 @@
 #! perl
 
-use Test::More tests => 3;
+use Test::More tests => 4;
 
-use Modern::Perl;
+BEGIN
+{
+    use_ok( 'Modern::Perl' ) or exit;
+    Modern::Perl->import();
+}
 
 eval 'say "# say() should be available";';
 is( $@, '', 'say() should be available' );

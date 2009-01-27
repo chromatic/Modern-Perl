@@ -1,5 +1,8 @@
 Revision history for Modern::Perl
 
+1.02    Tue Jan 27 03:44:29 UTC 2009
+    - removed the current need for B::Hooks::Parser (suggested by chocolateboy)
+
 1.01    Tue Jan 27 01:11:48 UTC 2009
     - fixed a documentation typo reported by Vasily Chekalkin
     - added caveats to the documentation per bug report from Ben Hengst

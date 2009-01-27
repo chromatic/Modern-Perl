@@ -12,7 +12,6 @@ my $builder = Module::Build->new(
     dist_version_from   => 'lib/Modern/Perl.pm',
     build_requires => {
         'Test::Simple'     => 0.80,
-        'B::Hooks::Parser' => 0.08,
         'perl'             => 5.010,
     },
     add_to_cleanup      => [ 'Modern-Perl-*' ],
