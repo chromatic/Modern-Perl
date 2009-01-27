@@ -1,4 +1,8 @@
 Revision history for Modern::Perl
 
+1.01    Tue Jan 27 01:11:48 UTC 2009
+    - fixed a documentation typo reported by Vasily Chekalkin
+    - added caveats to the documentation per bug report from Ben Hengst
+
 1.00    Mon Jan 26 22:41:28 UTC 2009
-   - First version, released on an unsuspecting world.
+    - First version, released on an unsuspecting world.
