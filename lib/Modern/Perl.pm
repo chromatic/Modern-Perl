@@ -9,19 +9,17 @@ Modern::Perl - enable all of the features of Modern Perl with one command
 
 =head1 VERSION
 
-Version 1.00
+Version 1.01
 
 =cut
 
-our $VERSION = '1.00';
+our $VERSION = '1.01';
 
 use B::Hooks::Parser;
 
 sub import
 {
-    my $id = B::Hooks::Parser::setup();
     B::Hooks::Parser::inject( 'use 5.010;use strict;use warnings;' );
-    B::Hooks::Parser::teardown($id);
 }
 
 =head1 SYNOPSIS
@@ -36,10 +34,9 @@ For now, this only enables the L<strict> and L<warnings> pragmas, as well as
 all of the features available in Perl 5.10.  In the future, it will include
 additional CPAN modules which have proven useful and stable.
 
-See
-L<http://http://www.modernperlbooks.com/mt/2009/01/toward-a-modernperl.html>
-for more information, and L<http://www.modernperlbooks.com/> for further
-discussion of Modern Perl and its implications.
+See L<http://www.modernperlbooks.com/mt/2009/01/toward-a-modernperl.html> for
+more information, and L<http://www.modernperlbooks.com/> for further discussion
+of Modern Perl and its implications.
 
 =head1 AUTHOR
 
@@ -47,7 +44,13 @@ chromatic, C<< <chromatic at wgz.org> >>
 
 =head1 BUGS
 
-None known.
+You I<must> use this in a program file, not on the command line with the C<-M>
+flag.  You I<cannot> currently get the correct results if you C<require> this
+module and call its C<import()> directly.  The former may be correctable, but
+the latter relies on compile-time scoping rules.  If you don't understand what
+this means, use instead:
+
+    use Modern::Perl;
 
 Please report any bugs or feature requests to C<bug-modern-perl at
 rt.cpan.org>, or through the web interface at
