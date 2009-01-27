@@ -9,17 +9,23 @@ Modern::Perl - enable all of the features of Modern Perl with one command
 
 =head1 VERSION
 
-Version 1.01
+Version 1.02
 
 =cut
 
-our $VERSION = '1.01';
+our $VERSION = '1.02';
 
-use B::Hooks::Parser;
+use 5.10.0;
 
-sub import
-{
-    B::Hooks::Parser::inject( 'use 5.010;use strict;use warnings;' );
+use strict;
+use warnings;
+
+use feature ();
+
+sub import {
+    warnings->import();
+    strict->import();
+    feature->import(':5.10');
 }
 
 =head1 SYNOPSIS
@@ -44,13 +50,7 @@ chromatic, C<< <chromatic at wgz.org> >>
 
 =head1 BUGS
 
-You I<must> use this in a program file, not on the command line with the C<-M>
-flag.  You I<cannot> currently get the correct results if you C<require> this
-module and call its C<import()> directly.  The former may be correctable, but
-the latter relies on compile-time scoping rules.  If you don't understand what
-this means, use instead:
-
-    use Modern::Perl;
+None reported.
 
 Please report any bugs or feature requests to C<bug-modern-perl at
 rt.cpan.org>, or through the web interface at
@@ -89,7 +89,8 @@ L<http://search.cpan.org/dist/Modern-Perl/>
 =head1 ACKNOWLEDGEMENTS
 
 Damian Conway (inspiration from L<Toolkit>), Florian Ragwitz
-(L<B::Hooks::Parser>, so I didn't have to write it myself).
+(L<B::Hooks::Parser>, so I didn't have to write it myself), chocolateboy (for
+suggesting that I don't even need L<B::Hooks::Parser>, at least for now).
 
 =head1 COPYRIGHT & LICENSE
 

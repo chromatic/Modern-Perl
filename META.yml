@@ -1,6 +1,6 @@
 ---
 name: Modern-Perl
-version: 1.01
+version: 1.02
 author:
   - 'chromatic <chromatic@wgz.org>'
 abstract: enable all of the features of Modern Perl with one command
@@ -8,13 +8,12 @@ license: perl
 resources:
   license: ~
 build_requires:
-  B::Hooks::Parser: 0.08
   Test::Simple: 0.8
   perl: 5.01
 provides:
   Modern::Perl:
     file: lib/Modern/Perl.pm
-    version: 1.01
+    version: 1.02
 generated_by: Module::Build version 0.31
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
