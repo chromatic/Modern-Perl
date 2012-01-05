@@ -25,6 +25,13 @@ sub import
     mro::set_mro( scalar caller(), 'c3' );
 }
 
+sub unimport
+{
+    warnings->unimport;
+    strict->unimport;
+    feature->unimport;
+}
+
 my %dates =
 (
     2009 => ':5.10',
@@ -52,10 +59,16 @@ instead write only one:
 
     use Modern::Perl;
 
-For now, this only enables the L<strict> and L<warnings> pragmas, as well as
-all of the features available in Perl 5.10.  It also enables C3 method
-resolution order; see C<perldoc mro> for an explanation.  In the future, it
-will include additional CPAN modules which have proven useful and stable.
+This enables the L<strict> and L<warnings> pragmas, as well as all of the
+features available in Perl 5.10. It also enables C3 method resolution order as
+documented in C<perldoc mro> and loads L<IO::File> and L<IO::Handle> so that
+you may call methods on filehandles. In the future, it may include additional
+core modules and pragmas.
+
+Because so much of this module's behavior uses lexically scoped pragmas, you
+may disable these pragmas within an inner scope with:
+
+    no Modern::Perl;
 
 See L<http://www.modernperlbooks.com/mt/2009/01/toward-a-modernperl.html> for
 more information, L<http://www.modernperlbooks.com/> for further discussion of
