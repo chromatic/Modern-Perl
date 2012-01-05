@@ -10,6 +10,10 @@ use autodie ();
 use mro     ();
 use feature ();
 
+# enable methods on filehandles; unnecessary when 5.14 autoloads them
+use IO::File   ();
+use IO::Handle ();
+
 sub import
 {
     my ($class, $date) = @_;
