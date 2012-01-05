@@ -1,3 +1,5 @@
 !.gitignore
 META.yml
 Modern-Perl-*/
+Modern-Perl-*.tar.gz
+.prove
