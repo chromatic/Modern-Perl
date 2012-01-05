@@ -1,6 +1,6 @@
 #! perl
 
-use Test::More tests => 5;
+use Test::More 0.98;
 
 BEGIN
 {
@@ -45,3 +45,5 @@ END_CLASSES
 package main;
 
 is_deeply( mro::get_linear_isa( 'D' ), [qw( D B C A )], 'mro should use C3' );
+
+done_testing;
