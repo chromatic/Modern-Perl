@@ -52,5 +52,4 @@ package main;
 
 is_deeply( mro::get_linear_isa( 'D' ), [qw( D B C A )], 'mro should use C3' );
 
-ok exists $INC{'autodie.pm'}, '... and should require autodie';
 done_testing;

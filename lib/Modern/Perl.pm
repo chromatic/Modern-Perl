@@ -6,7 +6,6 @@ use 5.010_000;
 use strict;
 use warnings;
 
-use autodie ();
 use mro     ();
 use feature ();
 
