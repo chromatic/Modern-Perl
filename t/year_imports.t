@@ -33,7 +33,7 @@ eval q|
     ok exists $^H{feature_say},     '... say';
     ok exists $^H{feature_state},   '... state';
     ok exists $^H{feature_unicode}, '... and unicode_strings';
-|;
+| if $] >= 5.012;
 
 eval q|
     Modern::Perl->import( '2012' );
@@ -43,7 +43,7 @@ eval q|
     ok exists $^H{feature_say},     '... say';
     ok exists $^H{feature_state},   '... state';
     ok exists $^H{feature_unicode}, '... and unicode_strings';
-|;
+| if $] >= 5.014;
 
 @features = grep /^feature_/, keys %^H;
 is @features, 0, '... but none should leak out';
