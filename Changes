@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20120105 2012-01-04 21:01:10 America/Los_Angeles
     - migrated to Dist::Zilla
     - added autodie dependency/import
 
