@@ -12,10 +12,32 @@ use feature ();
 
 sub import
 {
+    my ($class, $date) = @_;
+    my $feature_tag    = validate_date( $date );
+
     warnings->import();
     strict->import();
-    feature->import( ':5.10' );
+    feature->import( $feature_tag );
     mro::set_mro( scalar caller(), 'c3' );
+}
+
+my %dates =
+(
+    2009 => ':5.10',
+    2010 => ':5.10',
+    2011 => ':5.12',
+    2012 => ':5.14',
+);
+
+sub validate_date
+{
+    my $date = shift;
+    return ':5.10' unless $date;
+
+    my $year = substr $date, 0, 4;
+    return $dates{$year} if exists $dates{$year};
+
+    die "Unknown date '$date' requested\n";
 }
 
 =head1 SYNOPSIS
