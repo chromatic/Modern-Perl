@@ -1,6 +1,9 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - loaded IO::File/IO::Handle to allow methods on lexical filehandles
+    - added unimporting
+    - removed use of autodie; moved it to a distribution prerequisite
 
 1.20120105 2012-01-04 21:01:10 America/Los_Angeles
     - migrated to Dist::Zilla
