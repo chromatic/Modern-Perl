@@ -42,7 +42,13 @@ my %dates =
 sub validate_date
 {
     my $date = shift;
-    return ':5.10' unless $date;
+
+    # always enable unicode_strings when available
+    unless ($date)
+    {
+        return ':5.12' if $] > 5.011003;
+        return ':5.10';
+    }
 
     my $year = substr $date, 0, 4;
     return $dates{$year} if exists $dates{$year};

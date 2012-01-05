@@ -52,4 +52,13 @@ package main;
 
 is_deeply( mro::get_linear_isa( 'D' ), [qw( D B C A )], 'mro should use C3' );
 
+if ($] > 5.011003)
+{
+    eval q|
+    use Modern::Perl;
+    ok exists $^H{feature_unicode},
+        '... and should unilaterally enable unicode_strings, when available';
+    |;
+}
+
 done_testing;
