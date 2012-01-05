@@ -1,16 +1,5 @@
 package Modern::Perl;
-
-=head1 NAME
-
-Modern::Perl - enable all of the features of Modern Perl with one command
-
-=head1 VERSION
-
-Version 1.03
-
-=cut
-
-our $VERSION = '1.03';
+# ABSTRACT: enable all of the features of Modern Perl with one import
 
 use 5.010_000;
 
@@ -20,7 +9,8 @@ use warnings;
 use mro     ();
 use feature ();
 
-sub import {
+sub import
+{
     warnings->import();
     strict->import();
     feature->import( ':5.10' );
@@ -96,11 +86,11 @@ requesting features.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009 chromatic, all rights reserved.
+Copyright 2009-2012 chromatic, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl 5.10 itself.
 
 =cut
 
-1; # End of Modern::Perl
+1;

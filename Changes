@@ -1,5 +1,9 @@
 Revision history for Modern::Perl
 
+{{$NEXT}}
+    - migrated to Dist::Zilla
+    - added autodie dependency/import
+
 1.03    Wed Feb 18 00:40:40 UTC 2009
     - removed duplicate use lines (Damien Learns Perl)
     - fixed (hopefully) v-string warnings (Damien, David Moreno)

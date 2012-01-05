@@ -1,7 +1,0 @@
-Build.PL
-Changes
-MANIFEST
-README
-lib/Modern/Perl.pm
-t/base.t
-META.yml
