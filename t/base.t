@@ -56,8 +56,11 @@ if ($] > 5.011003)
 {
     eval q|
     use Modern::Perl;
-    ok exists $^H{feature_unicode},
+    BEGIN
+    {
+      ok exists $^H{feature_unicode},
         '... and should unilaterally enable unicode_strings, when available';
+    }
     |;
 }
 

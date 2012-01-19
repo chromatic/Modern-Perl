@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - fixed for Perl 5.15.5 and later (ANDK and sprout)
 
 1.20120106 2012-01-05 16:26:09 America/Los_Angeles
     - loaded IO::File/IO::Handle to allow methods on lexical filehandles
