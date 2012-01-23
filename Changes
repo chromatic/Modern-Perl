@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - made raw numbers work in import
 
 1.20120119 2012-01-19 15:01:10 America/Los_Angeles
     - fixed for Perl 5.15.5 and later (ANDK and sprout)
