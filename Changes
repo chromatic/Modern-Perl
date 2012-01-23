@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20120123 2012-01-23 10:16:10 America/Los_Angeles
     - made raw numbers work in import
 
 1.20120119 2012-01-19 15:01:10 America/Los_Angeles
