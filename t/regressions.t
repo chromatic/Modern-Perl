@@ -44,6 +44,7 @@ is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
 
 if ($] >= 5.012)
 {
+    eval <<'END_HERE';
     use Modern::Perl 2011;
     eval 'sub { given (0) {} }';
     is $@, '', q|use Modern::Perl 2011 enables switch|;
@@ -52,10 +53,12 @@ if ($] >= 5.012)
     eval 'state $x';
     is $@, '', q|use Modern::Perl 2011 enables state|;
     is uc "\xdf", "SS", '2011 enables unicode_strings';
+END_HERE
 }
 
 if ($] >= 5.014)
 {
+    eval <<'END_HERE';
     use Modern::Perl 2012;
     eval 'sub { given (0) {} }';
     is $@, '', q|use Modern::Perl 2012 enables switch|;
@@ -64,6 +67,7 @@ if ($] >= 5.014)
     eval 'state $x';
     is $@, '', q|use Modern::Perl 2012 enables state|;
     is uc "\xdf", "SS", '2012 enables unicode_strings';
+END_HERE
 }
 
 eval 'sub { given (0) {} }';

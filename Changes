@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - fixed t/regressions.t for 5.10
 
 1.20120123 2012-01-23 10:16:10 America/Los_Angeles
     - made raw numbers work in import
