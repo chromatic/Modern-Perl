@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20120126 2012-01-25 22:15:50 America/Los_Angeles
     - fixed t/regressions.t for 5.10
 
 1.20120123 2012-01-23 10:16:10 America/Los_Angeles
