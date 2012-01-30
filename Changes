@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20120130 2012-01-30 11:38:08 America/Los_Angeles
     - fixed t/year_imports.t for 5.10 (ANDK and sprout again)
 
 1.20120126 2012-01-25 22:15:50 America/Los_Angeles
