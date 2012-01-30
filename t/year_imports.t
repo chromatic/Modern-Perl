@@ -44,26 +44,30 @@ is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
 
 if ($] >= 5.012)
 {
-    use Modern::Perl '2011';
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl '2011' enables switch|;
-    eval 'sub { say 0 }';
-    is $@, '', q|use Modern::Perl '2011' enables say|;
-    eval 'state $x';
-    is $@, '', q|use Modern::Perl '2011' enables state|;
-    is uc "\xdf", "SS", '2011 enables unicode_strings';
+    eval q{
+        use Modern::Perl '2011';
+        eval 'sub { given (0) {} }';
+        is $@, '', q|use Modern::Perl '2011' enables switch|;
+        eval 'sub { say 0 }';
+        is $@, '', q|use Modern::Perl '2011' enables say|;
+        eval 'state $x';
+        is $@, '', q|use Modern::Perl '2011' enables state|;
+        is uc "\xdf", "SS", '2011 enables unicode_strings';
+    };
 }
 
 if ($] >= 5.014)
 {
-    use Modern::Perl '2012';
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl '2012' enables switch|;
-    eval 'sub { say 0 }';
-    is $@, '', q|use Modern::Perl '2012' enables say|;
-    eval 'state $x';
-    is $@, '', q|use Modern::Perl '2012' enables state|;
-    is uc "\xdf", "SS", '2012 enables unicode_strings';
+    eval q{
+        use Modern::Perl '2012';
+        eval 'sub { given (0) {} }';
+        is $@, '', q|use Modern::Perl '2012' enables switch|;
+        eval 'sub { say 0 }';
+        is $@, '', q|use Modern::Perl '2012' enables say|;
+        eval 'state $x';
+        is $@, '', q|use Modern::Perl '2012' enables state|;
+        is uc "\xdf", "SS", '2012 enables unicode_strings';
+    };
 }
 
 eval 'sub { given (0) {} }';
