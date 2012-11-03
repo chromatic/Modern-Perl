@@ -72,6 +72,8 @@ sub validate_date
     die "Unknown date '$date' requested\n";
 }
 
+=encoding utf8
+
 =head1 SYNOPSIS
 
 Modern Perl programs use several modules to enable additional features of Perl
@@ -172,8 +174,9 @@ L<http://search.cpan.org/dist/Modern-Perl/>
 Damian Conway (inspiration from L<Toolkit>), Florian Ragwitz
 (L<B::Hooks::Parser>, so I didn't have to write it myself), chocolateboy (for
 suggesting that I don't even need L<B::Hooks::Parser>), Damien Learns Perl,
-David Moreno, Evan Carroll, Elliot Shank, Andreas König, and Father
-Chrysostomos for reporting bugs, filing patches, and requesting features.
+David Moreno, Evan Carroll, Elliot Shank, Andreas König, Father Chrysostomos,
+and Norbert E. Grüner for reporting bugs, filing patches, and requesting
+features.
 
 =head1 COPYRIGHT & LICENSE
 
