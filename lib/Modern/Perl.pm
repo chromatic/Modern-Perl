@@ -19,7 +19,9 @@ my $wanted_date;
 sub VERSION
 {
     my ($self, $version) = @_;
-    return $VERSION if $version < 2009;
+
+    return $VERSION unless defined $version;
+    return $VERSION if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
     return 2012;

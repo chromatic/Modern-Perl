@@ -78,4 +78,17 @@ eval 'state $x';
 isnt $@, '', 'state feature does not leak out';
 is uc "\xdf", "\xdf", 'unicode_strings feature does not leak out';
 
+
+# RT #80304: warning on Modern::Perl->VERSION()
+{
+    my    $warning           = '';
+    local $SIG{__WARN__}     = sub { $warning = shift };
+    $Modern::Perl::VERSION ||= '1.20121103';
+
+    my   $version            = Modern::Perl->VERSION;
+    like $version, qr/1\.201\d/,
+        'VERSION() should return version number, given no argument';
+    is $warning, '', '... without warning about undef argument';
+}
+
 done_testing;

@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - fixed VERSION( undef ) (Peter Vereshagin, RT #80304)
     - fixed POD encoding error (Norbert E. Grüner, RT #80468)
 
 1.20120521 2012-05-21 15:58:59 America/Los_Angeles
