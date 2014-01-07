@@ -24,7 +24,7 @@ sub VERSION
     return $VERSION if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
-    return 2012;
+    return 2014;
 }
 
 sub import
@@ -35,8 +35,8 @@ sub import
     my $feature_tag    = validate_date( $date );
     undef $wanted_date;
 
-    warnings->import();
-    strict->import();
+    warnings->import;
+    strict->import;
     feature->import( $feature_tag );
     mro::set_mro( scalar caller(), 'c3' );
 }
@@ -55,6 +55,7 @@ my %dates =
     2011 => ':5.12',
     2012 => ':5.14',
     2013 => ':5.16',
+    2014 => ':5.18',
 );
 
 sub validate_date
@@ -117,17 +118,20 @@ optional import tag. For example:
 
     use Modern::Perl '2012';
 
-... enables 5.14 features, and:
+... enables 5.14 features:
 
     use Modern::Perl '2013';
 
-... enables 5.16 features. Obviously you cannot use newer features on earlier
+... enables 5.16 features, and:
+
+    use Modern::Perl '2014';
+
+... enables 5.18 features. Obviously you cannot use newer features on earlier
 versions. Perl will throw the appropriate exception if you try.
 
-In the near future--sometime around September 2012--this module may drop
-support for 5.10 and will complain (once per process) if you use a year too
-old. As of May 2012, Perl 5.12 is unsupported by the Perl 5 Porters, so please
-consider upgrading.
+By mid-2014, this module will drop support for 5.10 and 5.12 and will complain
+(once per process) if you use a year too old. As of January 2014, Perl 5.14 is
+unsupported by the Perl 5 Porters, so please consider upgrading.
 
 =head1 AUTHOR
 
@@ -182,10 +186,10 @@ features.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009-2012 chromatic, all rights reserved.
+Copyright 2009-2014 chromatic, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl 5.14 itself.
+under the same terms as Perl 5.18 itself.
 
 =cut
 

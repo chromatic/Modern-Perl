@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - updated for 2014 release
+    - added support for 5.18
 
 1.20121103 2012-11-03 13:30:26 America/Los_Angeles
     - fixed VERSION( undef ) (Peter Vereshagin, RT #80304)
