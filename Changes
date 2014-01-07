@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20140107 2014-01-07 15:35:42 America/Los_Angeles
     - updated for 2014 release
     - added support for 5.18
 
