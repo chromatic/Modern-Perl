@@ -56,6 +56,7 @@ my %dates =
     2012 => ':5.14',
     2013 => ':5.16',
     2014 => ':5.18',
+    2015 => ':5.20',
 );
 
 sub validate_date
@@ -126,7 +127,13 @@ optional import tag. For example:
 
     use Modern::Perl '2014';
 
-... enables 5.18 features. Obviously you cannot use newer features on earlier
+... enables 5.18 features, and:
+
+    use Modern::Perl '2015';
+
+... enables 5.20 features.
+
+Obviously you cannot use newer features on earlier
 versions. Perl will throw the appropriate exception if you try.
 
 By mid-2014, this module will drop support for 5.10 and 5.12 and will complain
