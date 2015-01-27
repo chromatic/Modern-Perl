@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - updated for 2015 release (Elmer Quintanilla)
+    - added support for 5.20
 
 1.20140107 2014-01-07 15:35:42 America/Los_Angeles
     - updated for 2014 release
