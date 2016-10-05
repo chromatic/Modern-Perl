@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20161005 2016-10-05 09:38:21-07:00 America/Los_Angeles
     - updated for 2016 release (Gryphon Shafer)
     - added support for 5.24
 
