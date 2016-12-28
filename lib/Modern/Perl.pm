@@ -13,15 +13,13 @@ use feature ();
 use IO::File   ();
 use IO::Handle ();
 
-our $VERSION;
-
 my $wanted_date;
 sub VERSION
 {
     my ($self, $version) = @_;
 
-    return $VERSION unless defined $version;
-    return $VERSION if             $version < 2009;
+    return $Modern::Perl::VERSION || 2016 unless defined $version;
+    return $Modern::Perl::VERSION || 2016 if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
     return 2016;
