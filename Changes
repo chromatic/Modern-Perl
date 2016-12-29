@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20161229 2016-12-28 16:02:17-08:00 America/Los_Angeles
     - improved VERSION numbering (Gryphon Shafer, GH #5)
 
 1.20161005 2016-10-05 09:38:21-07:00 America/Los_Angeles
