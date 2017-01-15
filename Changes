@@ -5,6 +5,7 @@ Revision history for Modern::Perl
 1.20170116 2017-01-16 08:46:50-08:00 America/Los_Angeles
     - updated for 2017 release
     - maybe 2016 should have supported 5.22, but given how long I waited... oops
+    - improved documentation about reexporting (RT #109076)
 
 1.20161229 2016-12-28 16:02:17-08:00 America/Los_Angeles
     - improved VERSION numbering (Gryphon Shafer, GH #5)

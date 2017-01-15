@@ -103,10 +103,20 @@ Modern Perl and its implications, and
 L<http://onyxneon.com/books/modern_perl/index.html> for a freely-downloadable
 Modern Perl tutorial.
 
+=head2 Wrapping Modern::Perl
+
+If you want to wrap Modern::Perl in your own C<import()> method, you can do so
+to add additional pragmas or features, such as the use of L<Try::Tiny>. Please
+note that, if you do so, you will I<not> automatically enable C3 method
+resolution in the calling scope. This is due to how the L<mro> pragma works. In
+your custom C<import()> method, you will need to write code such as:
+
+    mro::set_mro( scalar caller(), 'c3' );
+
 =head2 Forward Compatibility
 
-For forward compatibility, I recommend you specify a I<year> as the single
-optional import tag. For example:
+For forward compatibility, I recommend you specify a string containing a
+I<year> value as the single optional import tag. For example:
 
     use Modern::Perl '2009';
     use Modern::Perl '2010';
@@ -200,7 +210,7 @@ requesting features.
 Copyright 2009-2017 chromatic, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl 5.18 itself.
+under the same terms as Perl 5.24 itself.
 
 =cut
 
