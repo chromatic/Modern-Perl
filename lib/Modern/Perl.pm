@@ -18,11 +18,11 @@ sub VERSION
 {
     my ($self, $version) = @_;
 
-    return $Modern::Perl::VERSION || 2016 unless defined $version;
-    return $Modern::Perl::VERSION || 2016 if             $version < 2009;
+    return $Modern::Perl::VERSION || 2017 unless defined $version;
+    return $Modern::Perl::VERSION || 2017 if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
-    return 2016;
+    return 2017;
 }
 
 sub import
@@ -56,6 +56,7 @@ my %dates =
     2014 => ':5.18',
     2015 => ':5.20',
     2016 => ':5.24',
+    2017 => ':5.24',
 );
 
 sub validate_date
@@ -134,6 +135,10 @@ optional import tag. For example:
 
     use Modern::Perl '2016';
 
+... enables 5.24 features, and:
+
+    use Modern::Perl '2017';
+
 ... enables 5.24 features.
 
 Obviously you cannot use newer features on earlier
@@ -187,12 +192,12 @@ Damian Conway (inspiration from L<Toolkit>), Florian Ragwitz
 (L<B::Hooks::Parser>, so I didn't have to write it myself), chocolateboy (for
 suggesting that I don't even need L<B::Hooks::Parser>), Damien Learns Perl,
 David Moreno, Evan Carroll, Elliot Shank, Andreas König, Father Chrysostomos,
-and Norbert E. Grüner for reporting bugs, filing patches, and requesting
-features.
+Gryphon Shafer, and Norbert E. Grüner for reporting bugs, filing patches, and
+requesting features.
 
 =head1 COPYRIGHT & LICENSE
 
-Copyright 2009-2016 chromatic, all rights reserved.
+Copyright 2009-2017 chromatic, all rights reserved.
 
 This program is free software; you can redistribute it and/or modify it
 under the same terms as Perl 5.18 itself.

@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - updated for 2017 release
+    - maybe 2016 should have supported 5.22, but given how long I waited... oops
 
 1.20161229 2016-12-28 16:02:17-08:00 America/Los_Angeles
     - improved VERSION numbering (Gryphon Shafer, GH #5)

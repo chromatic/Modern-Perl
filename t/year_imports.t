@@ -185,6 +185,34 @@ if ($] >= 5.024)
     is $@, '', 'this block should succeed';
 }
 
+if ($] >= 5.024)
+{
+    eval q{
+        use Modern::Perl '2017';
+        eval 'sub { given (0) {} }';
+        is $@, '', q|use Modern::Perl '2017' enables switch|;
+        eval 'sub { say 0 }';
+        is $@, '', q|use Modern::Perl '2017' enables say|;
+        eval 'state $x';
+        is $@, '', q|use Modern::Perl '2017' enables state|;
+        is uc "\xdf", "SS", '2017 enables unicode_strings';
+        eval 'sub { return __SUB__ }';
+        is $@, '', q|use Modern::Perl '2017' enables current_sub|;
+        my $warning = '';
+        local $SIG{__WARN__} = sub { $warning = shift };
+        eval '$[ = 10';
+        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+            q|use Modern::Perl '2017' disables array_base|;
+        eval 'fc("tschü¼Ã")eq fc("TSCHÃS")';
+        is $@, '', q|use Modern::Perl '2017' enables fc|;
+        eval 'my $r = [ 1, [ 2, 3 ], 4 ]; $r->[1]->@*';
+        is $@, '', q|use Modern::Perl '2017' enables postderef_qq|;
+        eval 'my sub foo {}';
+        isnt $@, '', q|use Modern::Perl '2017' does not enable lexical subs|;
+    };
+    is $@, '', 'this block should succeed';
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, "", 'switch feature does not leak out';
 eval 'sub { say 0 }';
