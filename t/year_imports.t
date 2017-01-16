@@ -13,6 +13,16 @@ $SIG{__WARN__} = sub
     warn shift
 };
 
+sub test_lexical_subs_for
+{
+    # lexical subs removed from feature.pm in 5.25.2
+    return if $] >= 5.025002;
+
+    my $year = shift;
+    eval 'my sub foo {}';
+    isnt $@, '', qq|use Modern::Perl '$year' should not enable lexical subs|;
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 eval 'sub { say 0 }';
@@ -99,8 +109,7 @@ if ($] >= 5.016)
             q|use Modern::Perl '2013' disables array_base|;
         eval 'fc("tschüß") eq fc("TSCHÜSS")';
         is $@, '', q|use Modern::Perl '2013' enables fc|;
-        eval 'my sub foo {}';
-        isnt $@, '', q|use Modern::Perl '2013' should not enable lexical subs|;
+        test_lexical_subs_for( '2013' );
     };
     is $@, '', 'this block should succeed';
 }
@@ -125,8 +134,7 @@ if ($] >= 5.018)
             q|use Modern::Perl '2014' disables array_base|;
         eval 'fc("tschüß") eq fc("TSCHÜSS")';
         is $@, '', q|use Modern::Perl '2014' enables fc|;
-        eval 'my sub foo {}';
-        isnt $@, '', q|use Modern::Perl '2014' does not enable lexical subs|;
+        test_lexical_subs_for( '2014' );
     };
     is $@, '', 'this block should succeed';
 }
@@ -151,8 +159,7 @@ if ($] >= 5.020)
             q|use Modern::Perl '2015' disables array_base|;
         eval 'fc("tschü¼Ã")eq fc("TSCHÃS")';
         is $@, '', q|use Modern::Perl '2015' enables fc|;
-        eval 'my sub foo {}';
-        isnt $@, '', q|use Modern::Perl '2015' does not enable lexical subs|;
+        test_lexical_subs_for( '2015' );
     };
     is $@, '', 'this block should succeed';
 }
@@ -179,8 +186,7 @@ if ($] >= 5.024)
         is $@, '', q|use Modern::Perl '2016' enables fc|;
         eval 'my $r = [ 1, [ 2, 3 ], 4 ]; $r->[1]->@*';
         is $@, '', q|use Modern::Perl '2016' enables postderef_qq|;
-        eval 'my sub foo {}';
-        isnt $@, '', q|use Modern::Perl '2016' does not enable lexical subs|;
+        test_lexical_subs_for( '2016' );
     };
     is $@, '', 'this block should succeed';
 }
@@ -207,8 +213,7 @@ if ($] >= 5.024)
         is $@, '', q|use Modern::Perl '2017' enables fc|;
         eval 'my $r = [ 1, [ 2, 3 ], 4 ]; $r->[1]->@*';
         is $@, '', q|use Modern::Perl '2017' enables postderef_qq|;
-        eval 'my sub foo {}';
-        isnt $@, '', q|use Modern::Perl '2017' does not enable lexical subs|;
+        test_lexical_subs_for( '2017' );
     };
     is $@, '', 'this block should succeed';
 }
