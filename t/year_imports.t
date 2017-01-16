@@ -13,25 +13,42 @@ $SIG{__WARN__} = sub
     warn shift
 };
 
+sub _get_year {
+    my $year = shift;
+    return $year eq '()' ? $year : "'$year'";
+}
+
 sub test_lexical_subs_for
 {
     # lexical subs removed from feature.pm in 5.25.2
     return if $] >= 5.025002;
 
-    my $year = shift;
-    eval 'my sub foo {}';
+    my $year = _get_year(shift);
+    eval qq|use Modern::Perl $year; my sub foo {}|;
     isnt $@, '', qq|use Modern::Perl '$year' should not enable lexical subs|;
+}
+
+sub test_switch_for {
+    my $year = _get_year(shift);
+
+    eval qq|use Modern::Perl $year; sub { given (0) {} }|;
+    diag $@;
+    is $@, '', qq|use Modern::Perl $year enables switch|;
 }
 
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
+
 eval 'sub { say 0 }';
 isnt $@, '', 'use Modern::Perl () does not enable say';
+
 eval 'state $x;';
 isnt $@, '', 'use Modern::Perl () does not enable state';
 is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
+
 eval 'sub { return __SUB__ }';
 is $@, '', q|use Modern::Perl '2013' does not enable current_sub|;
+
 my $warning = '';
 {
     local $SIG{__WARN__} = sub { $warning = shift };
@@ -41,8 +58,7 @@ my $warning = '';
 
 {
     use Modern::Perl '2009';
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl '2009' enables switch|;
+    test_switch_for( '2009' );
     eval 'sub { say 0 }';
     is $@, '', q|use Modern::Perl '2009' enables say|;
     eval 'state $x';
@@ -52,8 +68,7 @@ my $warning = '';
 
 {
     use Modern::Perl '2010';
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl '2010' enables switch|;
+    test_switch_for( '2010' );
     eval 'sub { say 0 }';
     is $@, '', q|use Modern::Perl '2010' enables say|;
     eval 'state $x';
@@ -65,8 +80,7 @@ if ($] >= 5.012)
 {
     eval q{
         use Modern::Perl '2011';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2011' enables switch|;
+        test_switch_for( '2011' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2011' enables say|;
         eval 'state $x';
@@ -79,8 +93,7 @@ if ($] >= 5.014)
 {
     eval q{
         use Modern::Perl '2012';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2012' enables switch|;
+        test_switch_for( '2012' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2012' enables say|;
         eval 'state $x';
@@ -93,8 +106,7 @@ if ($] >= 5.016)
 {
     eval q{
         use Modern::Perl '2013';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2013' enables switch|;
+        test_switch_for( '2013' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2013' enables say|;
         eval 'state $x';
@@ -118,8 +130,7 @@ if ($] >= 5.018)
 {
     eval q{
         use Modern::Perl '2014';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2014' enables switch|;
+        test_switch_for( '2014' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2014' enables say|;
         eval 'state $x';
@@ -143,8 +154,7 @@ if ($] >= 5.020)
 {
     eval q{
         use Modern::Perl '2015';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2015' enables switch|;
+        test_switch_for( '2015' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2015' enables say|;
         eval 'state $x';
@@ -168,8 +178,7 @@ if ($] >= 5.024)
 {
     eval q{
         use Modern::Perl '2016';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2016' enables switch|;
+        test_switch_for( '2016' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2016' enables say|;
         eval 'state $x';
@@ -195,8 +204,7 @@ if ($] >= 5.024)
 {
     eval q{
         use Modern::Perl '2017';
-        eval 'sub { given (0) {} }';
-        is $@, '', q|use Modern::Perl '2017' enables switch|;
+        test_switch_for( '2017' );
         eval 'sub { say 0 }';
         is $@, '', q|use Modern::Perl '2017' enables say|;
         eval 'state $x';
