@@ -35,6 +35,13 @@ sub test_switch_for {
     is $@, '', qq|use Modern::Perl $year enables switch|;
 }
 
+sub test_say_for {
+    my $year = _get_year(shift);
+
+    eval qq|use Modern::Perl $year; sub { say 0 }|;
+    is $@, '', qq|use Modern::Perl $year enables say|;
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 
@@ -58,8 +65,7 @@ my $warning = '';
 {
     use Modern::Perl '2009';
     test_switch_for( '2009' );
-    eval 'sub { say 0 }';
-    is $@, '', q|use Modern::Perl '2009' enables say|;
+    test_say_for( '2009' );
     eval 'state $x';
     is $@, '', q|use Modern::Perl '2009' enables state|;
     is uc "\xdf", "\xdf", 'but not unicode_strings';
@@ -68,8 +74,7 @@ my $warning = '';
 {
     use Modern::Perl '2010';
     test_switch_for( '2010' );
-    eval 'sub { say 0 }';
-    is $@, '', q|use Modern::Perl '2010' enables say|;
+    test_say_for( '2010' );
     eval 'state $x';
     is $@, '', q|use Modern::Perl '2010' enables state|;
     is uc "\xdf", "\xdf", 'but not unicode_strings';
@@ -80,9 +85,8 @@ if ($] >= 5.012)
     my $year = 2011;
     eval qq{
         use Modern::Perl '$year';
-        test_switch_for( '$year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2011' enables say|;
+        test_switch_for(  $year );
+        test_say_for(     $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2011' enables state|;
         is uc "\xdf", "SS", '2011 enables unicode_strings';
@@ -95,9 +99,8 @@ if ($] >= 5.014)
 
     eval qq{
         use Modern::Perl '$year';
-        test_switch_for( '$year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2012' enables say|;
+        test_switch_for(  $year );
+        test_say_for(     $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2012' enables state|;
         is uc "\xdf", "SS", '2012 enables unicode_strings';
@@ -113,9 +116,8 @@ if ($] >= 5.016)
 
     eval qq{
         use Modern::Perl '$year';
-        test_switch_for( '$year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2013' enables say|;
+        test_switch_for(  $year );
+        test_say_for(     $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2013' enables state|;
         is uc "\xdf", "SS", '2013 enables unicode_strings';
@@ -141,9 +143,8 @@ if ($] >= 5.018)
 
     eval qq{
         use Modern::Perl '$year';
-        test_switch_for( '$year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2014' enables say|;
+        test_switch_for(  $year );
+        test_say_for(     $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2014' enables state|;
         is uc "\xdf", "SS", '2014 enables unicode_strings';
@@ -169,9 +170,8 @@ if ($] >= 5.020)
 
     eval qq{
         use Modern::Perl '$year';
-        test_switch_for( '$year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2015' enables say|;
+        test_switch_for(  $year );
+        test_say_for(     $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2015' enables state|;
         is uc "\xdf", "SS", '2015 enables unicode_strings';
@@ -198,8 +198,7 @@ if ($] >= 5.024)
     eval qq{
         use Modern::Perl '$year';
         test_switch_for( $year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2016' enables say|;
+        test_say_for(    $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2016' enables state|;
         is uc "\xdf", "SS", '2016 enables unicode_strings';
@@ -228,8 +227,7 @@ if ($] >= 5.024)
     eval qq{
         use Modern::Perl '$year';
         test_switch_for( $year' );
-        eval 'sub { say 0 }';
-        is \$@, '', q|use Modern::Perl '2017' enables say|;
+        test_say_for(    $year );
         eval 'state \$x';
         is \$@, '', q|use Modern::Perl '2017' enables state|;
         is uc "\xdf", "SS", '2017 enables unicode_strings';
