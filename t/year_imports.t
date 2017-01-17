@@ -49,6 +49,13 @@ sub test_state_for {
     is $@, '', qq|use Modern::Perl $year enables state|;
 }
 
+sub test_cur_sub_for {
+    my $year = _get_year(shift);
+
+    eval qq|use Modern::Perl $year; sub { return __SUB__ }|;
+    is $@, '', qq|use Modern::Perl $year enables current_sub|;
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 
@@ -126,10 +133,10 @@ if ($] >= 5.016)
         test_switch_for(  $year );
         test_say_for(     $year );
         test_state_for(   $year );
+        test_cur_sub_for( $year );
 
         is uc "\xdf", "SS", '2013 enables unicode_strings';
-        eval 'sub { return __SUB__ }';
-        is \$@, '', q|use Modern::Perl '2013' enables current_sub|;
+
         eval '\$[ = 10';
         like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2013' disables array_base|;
@@ -153,10 +160,9 @@ if ($] >= 5.018)
         test_switch_for(  $year );
         test_say_for(     $year );
         test_state_for(   $year );
+        test_cur_sub_for( $year );
 
         is uc "\xdf", "SS", '2014 enables unicode_strings';
-        eval 'sub { return __SUB__ }';
-        is \$@, '', q|use Modern::Perl '2014' enables current_sub|;
         eval '\$[ = 10';
         like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2014' disables array_base|;
@@ -180,10 +186,9 @@ if ($] >= 5.020)
         test_switch_for(  $year );
         test_say_for(     $year );
         test_state_for(   $year );
+        test_cur_sub_for( $year );
 
         is uc "\xdf", "SS", '2015 enables unicode_strings';
-        eval 'sub { return __SUB__ }';
-        is \$@, '', q|use Modern::Perl '2015' enables current_sub|;
         eval '\$[ = 10';
         like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2015' disables array_base|;
@@ -207,10 +212,9 @@ if ($] >= 5.024)
         test_switch_for( $year' );
         test_say_for(    $year );
         test_state_for(   $year );
+        test_cur_sub_for( $year );
 
         is uc "\xdf", "SS", '2016 enables unicode_strings';
-        eval 'sub { return __SUB__ }';
-        is \$@, '', q|use Modern::Perl '2016' enables current_sub|;
         eval '\$[ = 10';
         like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2016' disables array_base|;
@@ -236,10 +240,9 @@ if ($] >= 5.024)
         test_switch_for( $year' );
         test_say_for(    $year );
         test_state_for(   $year );
+        test_cur_sub_for( $year );
 
         is uc "\xdf", "SS", '2017 enables unicode_strings';
-        eval 'sub { return __SUB__ }';
-        is \$@, '', q|use Modern::Perl '2017' enables current_sub|;
         eval '\$[ = 10';
         like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2017' disables array_base|;
