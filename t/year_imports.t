@@ -82,6 +82,15 @@ sub test_postderef_for {
     is $@, '', qq|use Modern::Perl $year enables postderef_qq|;
 }
 
+sub test_unicode_strings_for {
+    my $year = _get_year(shift);
+
+    eval qq{
+        use Modern::Perl $year;
+        is uc "\xdf", "SS", q|$year enables unicode_strings|;
+    };
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 
@@ -124,12 +133,11 @@ if ($] >= 5.012)
 {
     my $year = 2011;
     eval qq{
-        use Modern::Perl '$year';
-        test_switch_for(  $year );
-        test_say_for(     $year );
-        test_state_for(   $year );
-
-        is uc "\xdf", "SS", '2011 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_unicode_strings_for( $year );
     };
 }
 
@@ -138,12 +146,11 @@ if ($] >= 5.014)
     my $year = 2012;
 
     eval qq{
-        use Modern::Perl '$year';
-        test_switch_for(  $year );
-        test_say_for(     $year );
-        test_state_for(   $year );
-
-        is uc "\xdf", "SS", '2012 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_unicode_strings_for( $year );
     };
 }
 
@@ -155,16 +162,15 @@ if ($] >= 5.016)
     local $SIG{__WARN__} = sub { $warning = shift };
 
     eval qq{
-        use Modern::Perl      '$year';
-        test_switch_for(       $year );
-        test_say_for(          $year );
-        test_state_for(        $year );
-        test_cur_sub_for(      $year );
-        test_array_base_for(   $year );
-        test_lexical_subs_for( $year );
-        test_fc_for(           $year );
-
-        is uc "\xdf", "SS", '2013 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_cur_sub_for(         $year );
+        test_array_base_for(      $year );
+        test_lexical_subs_for(    $year );
+        test_fc_for(              $year );
+        test_unicode_strings_for( $year );
     };
     is $@, '', 'this block should succeed';
 }
@@ -178,16 +184,15 @@ if ($] >= 5.018)
     local $SIG{__WARN__} = sub { $warning = shift };
 
     eval qq{
-        use Modern::Perl      '$year';
-        test_switch_for(       $year );
-        test_say_for(          $year );
-        test_state_for(        $year );
-        test_cur_sub_for(      $year );
-        test_array_base_for(   $year );
-        test_lexical_subs_for( $year );
-        test_fc_for(           $year );
-
-        is uc "\xdf", "SS", '2014 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_cur_sub_for(         $year );
+        test_array_base_for(      $year );
+        test_lexical_subs_for(    $year );
+        test_fc_for(              $year );
+        test_unicode_strings_for( $year );
     };
     is $@, '', 'this block should succeed';
 }
@@ -201,16 +206,15 @@ if ($] >= 5.020)
     local $SIG{__WARN__} = sub { $warning = shift };
 
     eval qq{
-        use Modern::Perl      '$year';
-        test_switch_for(       $year );
-        test_say_for(          $year );
-        test_state_for(        $year );
-        test_cur_sub_for(      $year );
-        test_array_base_for(   $year );
-        test_lexical_subs_for( $year );
-        test_fc_for(           $year );
-
-        is uc "\xdf", "SS", '2015 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_cur_sub_for(         $year );
+        test_array_base_for(      $year );
+        test_lexical_subs_for(    $year );
+        test_fc_for(              $year );
+        test_unicode_strings_for( $year );
     };
     is $@, '', 'this block should succeed';
 }
@@ -224,17 +228,16 @@ if ($] >= 5.024)
     local $SIG{__WARN__} = sub { $warning = shift };
 
     eval qq{
-        use Modern::Perl      '$year';
-        test_switch_for(       $year );
-        test_say_for(          $year );
-        test_state_for(        $year );
-        test_cur_sub_for(      $year );
-        test_array_base_for(   $year );
-        test_lexical_subs_for( $year );
-        test_fc_for(           $year );
-        test_postderef_for(    $year );
-
-        is uc "\xdf", "SS", '2016 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_cur_sub_for(         $year );
+        test_array_base_for(      $year );
+        test_lexical_subs_for(    $year );
+        test_fc_for(              $year );
+        test_postderef_for(       $year );
+        test_unicode_strings_for( $year );
     };
     is $@, '', 'this block should succeed';
 }
@@ -248,17 +251,16 @@ if ($] >= 5.024)
     local $SIG{__WARN__} = sub { $warning = shift };
 
     eval qq{
-        use Modern::Perl      '$year';
-        test_switch_for(       $year );
-        test_say_for(          $year );
-        test_state_for(        $year );
-        test_cur_sub_for(      $year );
-        test_array_base_for(   $year );
-        test_lexical_subs_for( $year );
-        test_fc_for(           $year );
-        test_postderef_for(    $year );
-
-        is uc "\xdf", "SS", '2017 enables unicode_strings';
+        use Modern::Perl         '$year';
+        test_switch_for(          $year );
+        test_say_for(             $year );
+        test_state_for(           $year );
+        test_cur_sub_for(         $year );
+        test_array_base_for(      $year );
+        test_lexical_subs_for(    $year );
+        test_fc_for(              $year );
+        test_postderef_for(       $year );
+        test_unicode_strings_for( $year );
     };
     is $@, '', 'this block should succeed';
 }
