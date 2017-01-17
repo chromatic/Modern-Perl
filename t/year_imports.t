@@ -32,7 +32,6 @@ sub test_switch_for {
     my $year = _get_year(shift);
 
     eval qq|use Modern::Perl $year; sub { given (0) {} }|;
-    diag $@;
     is $@, '', qq|use Modern::Perl $year enables switch|;
 }
 
@@ -78,73 +77,83 @@ my $warning = '';
 
 if ($] >= 5.012)
 {
-    eval q{
-        use Modern::Perl '2011';
-        test_switch_for( '2011' );
+    my $year = 2011;
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( '$year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2011' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2011' enables state|;
+        is \$@, '', q|use Modern::Perl '2011' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2011' enables state|;
         is uc "\xdf", "SS", '2011 enables unicode_strings';
     };
 }
 
 if ($] >= 5.014)
 {
-    eval q{
-        use Modern::Perl '2012';
-        test_switch_for( '2012' );
+    my $year = 2012;
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( '$year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2012' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2012' enables state|;
+        is \$@, '', q|use Modern::Perl '2012' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2012' enables state|;
         is uc "\xdf", "SS", '2012 enables unicode_strings';
     };
 }
 
 if ($] >= 5.016)
 {
-    eval q{
-        use Modern::Perl '2013';
-        test_switch_for( '2013' );
+    my $year = 2013;
+    local $@;
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( '$year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2013' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2013' enables state|;
+        is \$@, '', q|use Modern::Perl '2013' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2013' enables state|;
         is uc "\xdf", "SS", '2013 enables unicode_strings';
         eval 'sub { return __SUB__ }';
-        is $@, '', q|use Modern::Perl '2013' enables current_sub|;
-        my $warning = '';
-        local $SIG{__WARN__} = sub { $warning = shift };
-        eval '$[ = 10';
-        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+        is \$@, '', q|use Modern::Perl '2013' enables current_sub|;
+        eval '\$[ = 10';
+        like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2013' disables array_base|;
         eval 'fc("tschüß") eq fc("TSCHÜSS")';
-        is $@, '', q|use Modern::Perl '2013' enables fc|;
-        test_lexical_subs_for( '2013' );
+        is \$@, '', q|use Modern::Perl '2013' enables fc|;
+        test_lexical_subs_for( '$year' );
     };
     is $@, '', 'this block should succeed';
 }
 
 if ($] >= 5.018)
 {
-    eval q{
-        use Modern::Perl '2014';
-        test_switch_for( '2014' );
+    my $year = 2014;
+    local $@;
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( '$year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2014' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2014' enables state|;
+        is \$@, '', q|use Modern::Perl '2014' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2014' enables state|;
         is uc "\xdf", "SS", '2014 enables unicode_strings';
         eval 'sub { return __SUB__ }';
-        is $@, '', q|use Modern::Perl '2014' enables current_sub|;
-        my $warning = '';
-        local $SIG{__WARN__} = sub { $warning = shift };
-        eval '$[ = 10';
-        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+        is \$@, '', q|use Modern::Perl '2014' enables current_sub|;
+        eval '\$[ = 10';
+        like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2014' disables array_base|;
         eval 'fc("tschüß") eq fc("TSCHÜSS")';
-        is $@, '', q|use Modern::Perl '2014' enables fc|;
+        is \$@, '', q|use Modern::Perl '2014' enables fc|;
         test_lexical_subs_for( '2014' );
     };
     is $@, '', 'this block should succeed';
@@ -152,23 +161,27 @@ if ($] >= 5.018)
 
 if ($] >= 5.020)
 {
-    eval q{
-        use Modern::Perl '2015';
-        test_switch_for( '2015' );
+    my $year = 2015;
+    local $@;
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( '$year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2015' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2015' enables state|;
+        is \$@, '', q|use Modern::Perl '2015' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2015' enables state|;
         is uc "\xdf", "SS", '2015 enables unicode_strings';
         eval 'sub { return __SUB__ }';
-        is $@, '', q|use Modern::Perl '2015' enables current_sub|;
-        my $warning = '';
-        local $SIG{__WARN__} = sub { $warning = shift };
-        eval '$[ = 10';
-        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+        is \$@, '', q|use Modern::Perl '2015' enables current_sub|;
+        eval '\$[ = 10';
+        like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2015' disables array_base|;
         eval 'fc("tschü¼Ã")eq fc("TSCHÃS")';
-        is $@, '', q|use Modern::Perl '2015' enables fc|;
+        is \$@, '', q|use Modern::Perl '2015' enables fc|;
         test_lexical_subs_for( '2015' );
     };
     is $@, '', 'this block should succeed';
@@ -176,25 +189,29 @@ if ($] >= 5.020)
 
 if ($] >= 5.024)
 {
-    eval q{
-        use Modern::Perl '2016';
-        test_switch_for( '2016' );
+    my $year = 2016;
+    local $@;
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( $year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2016' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2016' enables state|;
+        is \$@, '', q|use Modern::Perl '2016' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2016' enables state|;
         is uc "\xdf", "SS", '2016 enables unicode_strings';
         eval 'sub { return __SUB__ }';
-        is $@, '', q|use Modern::Perl '2016' enables current_sub|;
-        my $warning = '';
-        local $SIG{__WARN__} = sub { $warning = shift };
-        eval '$[ = 10';
-        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+        is \$@, '', q|use Modern::Perl '2016' enables current_sub|;
+        eval '\$[ = 10';
+        like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2016' disables array_base|;
         eval 'fc("tschü¼Ã")eq fc("TSCHÃS")';
-        is $@, '', q|use Modern::Perl '2016' enables fc|;
-        eval 'my $r = [ 1, [ 2, 3 ], 4 ]; $r->[1]->@*';
-        is $@, '', q|use Modern::Perl '2016' enables postderef_qq|;
+        is \$@, '', q|use Modern::Perl '2016' enables fc|;
+        eval 'my \$r = [ 1, [ 2, 3 ], 4 ]; \$r->[1]->@*';
+        is \$@, '', q|use Modern::Perl '2016' enables postderef_qq|;
         test_lexical_subs_for( '2016' );
     };
     is $@, '', 'this block should succeed';
@@ -202,25 +219,29 @@ if ($] >= 5.024)
 
 if ($] >= 5.024)
 {
-    eval q{
-        use Modern::Perl '2017';
-        test_switch_for( '2017' );
+    my $year = 2017;
+    local $@;
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl '$year';
+        test_switch_for( $year' );
         eval 'sub { say 0 }';
-        is $@, '', q|use Modern::Perl '2017' enables say|;
-        eval 'state $x';
-        is $@, '', q|use Modern::Perl '2017' enables state|;
+        is \$@, '', q|use Modern::Perl '2017' enables say|;
+        eval 'state \$x';
+        is \$@, '', q|use Modern::Perl '2017' enables state|;
         is uc "\xdf", "SS", '2017 enables unicode_strings';
         eval 'sub { return __SUB__ }';
-        is $@, '', q|use Modern::Perl '2017' enables current_sub|;
-        my $warning = '';
-        local $SIG{__WARN__} = sub { $warning = shift };
-        eval '$[ = 10';
-        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+        is \$@, '', q|use Modern::Perl '2017' enables current_sub|;
+        eval '\$[ = 10';
+        like \$warning, qr/Use of assignment to \\\$\\[ is deprecated/,
             q|use Modern::Perl '2017' disables array_base|;
         eval 'fc("tschü¼Ã")eq fc("TSCHÃS")';
-        is $@, '', q|use Modern::Perl '2017' enables fc|;
-        eval 'my $r = [ 1, [ 2, 3 ], 4 ]; $r->[1]->@*';
-        is $@, '', q|use Modern::Perl '2017' enables postderef_qq|;
+        is \$@, '', q|use Modern::Perl '2017' enables fc|;
+        eval 'my \$r = [ 1, [ 2, 3 ], 4 ]; \$r->[1]->@*';
+        is \$@, '', q|use Modern::Perl '2017' enables postderef_qq|;
         test_lexical_subs_for( '2017' );
     };
     is $@, '', 'this block should succeed';
