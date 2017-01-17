@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20170117 2017-01-16 20:37:12-08:00 America/Los_Angeles
     - cleaned up test suite
     - fixed Perl 5.25 failures (RT #114690)
 
