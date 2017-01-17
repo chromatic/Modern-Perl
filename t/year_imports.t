@@ -75,6 +75,13 @@ sub test_fc_for {
     is $@, '', qq|use Modern::Perl $year enables fc|;
 }
 
+sub test_postderef_for {
+    my $year = _get_year(shift);
+
+    eval qq|use Modern::Perl $year; my \$r = [ 1, [ 2, 3 ], 4 ]; \$r->[1]->@*|;
+    is $@, '', qq|use Modern::Perl $year enables postderef_qq|;
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 
@@ -225,10 +232,9 @@ if ($] >= 5.024)
         test_array_base_for(   $year );
         test_lexical_subs_for( $year );
         test_fc_for(           $year );
+        test_postderef_for(    $year );
 
         is uc "\xdf", "SS", '2016 enables unicode_strings';
-        eval 'my \$r = [ 1, [ 2, 3 ], 4 ]; \$r->[1]->@*';
-        is \$@, '', q|use Modern::Perl '2016' enables postderef_qq|;
     };
     is $@, '', 'this block should succeed';
 }
@@ -250,10 +256,9 @@ if ($] >= 5.024)
         test_array_base_for(   $year );
         test_lexical_subs_for( $year );
         test_fc_for(           $year );
+        test_postderef_for(    $year );
 
         is uc "\xdf", "SS", '2017 enables unicode_strings';
-        eval 'my \$r = [ 1, [ 2, 3 ], 4 ]; \$r->[1]->@*';
-        is \$@, '', q|use Modern::Perl '2017' enables postderef_qq|;
     };
     is $@, '', 'this block should succeed';
 }
