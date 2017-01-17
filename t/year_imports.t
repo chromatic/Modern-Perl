@@ -55,8 +55,8 @@ is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
 eval 'sub { return __SUB__ }';
 is $@, '', q|use Modern::Perl '2013' does not enable current_sub|;
 
-my $warning = '';
 {
+    my $warning = '';
     local $SIG{__WARN__} = sub { $warning = shift };
     eval 'fc("tschüß") eq fc("TSCHÜSS")';
     isnt $@, '', q|use Modern::Perl () does not enable fc|;
