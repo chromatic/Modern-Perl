@@ -62,10 +62,14 @@ sub test_array_base_for {
     my $warning = '';
     local $SIG{__WARN__} = sub { $warning = shift };
 
-    eval qq|use Modern::Perl $year; \$[ = 10;|;
-
-    like $warning, qr/Use of assignment to \$\[ is deprecated/,
-        qq|use Modern::Perl $year disables array_base|;
+    if (eval qq|use Modern::Perl $year; \$[ = 10|) {
+        like $warning, qr/Use of assignment to \$\[ is deprecated/,
+            qq|use Modern::Perl $year disables array_base|;
+    }
+    else {
+        like $@, qr/Assigning non-zero to \$\[ is no longer possible/,
+            qq|use Modern::Perl $year works without array_base|;
+    }
 }
 
 sub test_fc_for {
