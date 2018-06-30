@@ -18,11 +18,11 @@ sub VERSION
 {
     my ($self, $version) = @_;
 
-    return $Modern::Perl::VERSION || 2017 unless defined $version;
-    return $Modern::Perl::VERSION || 2017 if             $version < 2009;
+    return $Modern::Perl::VERSION || 2018 unless defined $version;
+    return $Modern::Perl::VERSION || 2018 if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
-    return 2017;
+    return 2018;
 }
 
 sub import
@@ -57,6 +57,8 @@ my %dates =
     2015 => ':5.20',
     2016 => ':5.24',
     2017 => ':5.24',
+    2018 => ':5.26',
+    2019 => ':5.28',
 );
 
 sub validate_date
@@ -90,7 +92,7 @@ This enables the L<strict> and L<warnings> pragmas, as well as all of the
 features available in Perl 5.10. It also enables C3 method resolution order as
 documented in C<perldoc mro> and loads L<IO::File> and L<IO::Handle> so that
 you may call methods on filehandles. In the future, it may include additional
-core modules and pragmas.
+core modules and pragmas (but is unlikely to include non-core features).
 
 Because so much of this module's behavior uses lexically scoped pragmas, you
 may disable these pragmas within an inner scope with:
@@ -149,7 +151,11 @@ I<year> value as the single optional import tag. For example:
 
     use Modern::Perl '2017';
 
-... enables 5.24 features.
+... enables 5.24 features, and:
+
+    use Modern::Perl '2018';
+
+... enables 5.26 features.
 
 Obviously you cannot use newer features on earlier
 versions. Perl will throw the appropriate exception if you try.
@@ -204,13 +210,6 @@ suggesting that I don't even need L<B::Hooks::Parser>), Damien Learns Perl,
 David Moreno, Evan Carroll, Elliot Shank, Andreas König, Father Chrysostomos,
 Gryphon Shafer, and Norbert E. Grüner for reporting bugs, filing patches, and
 requesting features.
-
-=head1 COPYRIGHT & LICENSE
-
-Copyright 2009-2017 chromatic, all rights reserved.
-
-This program is free software; you can redistribute it and/or modify it
-under the same terms as Perl 5.24 itself.
 
 =cut
 
