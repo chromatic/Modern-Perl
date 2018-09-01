@@ -4,6 +4,11 @@ use Test::More 0.98;
 
 use Modern::Perl ();
 
+if ($ENV{PERL5OPT}) {
+    plan( skip_all => "Cannot reliably test with PERL5OPT set" );
+    exit 0;
+}
+
 $SIG{__WARN__} = sub
 {
     return if $_[0] =~ /Number found where operator expected/;

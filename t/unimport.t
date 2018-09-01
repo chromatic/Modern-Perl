@@ -3,6 +3,11 @@
 use Test::More 0.98;
 use Modern::Perl;
 
+if ($ENV{PERL5OPT}) {
+    plan( skip_all => "Cannot reliably test with PERL5OPT set" );
+    exit 0;
+}
+
 eval 'say "# say() should be available";';
 is $@, '', 'say() should be available';
 
