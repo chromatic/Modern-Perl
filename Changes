@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20180928 2018-09-27 18:29:25-07:00 America/Los_Angeles
     - skip tests for Perls without arraybase (Dagfinn Ilmari Mannsåker, GH #10)
 
 1.20180901 2018-09-01 12:19:53-07:00 America/Los_Angeles
