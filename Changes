@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - autogenerate META.json file (Mohammad S Anwar, GH PR #7)
 
 1.20180928 2018-09-27 18:29:25-07:00 America/Los_Angeles
     - skip tests for Perls without arraybase (Dagfinn Ilmari Mannsåker, GH #10)
