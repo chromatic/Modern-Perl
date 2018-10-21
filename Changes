@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20181021 2018-10-21 12:09:32-07:00 America/Los_Angeles
     - autogenerate META.json file (Mohammad S Anwar, GH PR #7)
     - remove Module::Build build dependency to make installation easier
 
