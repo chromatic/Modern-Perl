@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20190601 2019-06-01 09:19:36-07:00 America/Los_Angeles
     - update for 2019
     - reduce scope of lexical %dates (RT #128406)
     - support `perl -Modern::Perl=20xx` (RT #96319)
