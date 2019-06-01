@@ -100,6 +100,16 @@ Modern Perl and its implications, and
 L<http://onyxneon.com/books/modern_perl/index.html> for a freely-downloadable
 Modern Perl tutorial.
 
+=head2 CLI Usage
+
+As of Modern::Perl 2019, you may also enable this pragma from the command line:
+
+    $ perl -Modern::Perl -e "say 'Take that, awk!'"
+
+You may also enable year-specific features:
+
+    $ perl -Modern::Perl=2020 -e "say 'Looking forward to Perl 5.30!'"
+
 =head2 Wrapping Modern::Perl
 
 If you want to wrap Modern::Perl in your own C<import()> method, you can do so
