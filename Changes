@@ -1,6 +1,9 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - update for 2019
+    - reduce scope of lexical %dates (RT #128406)
+    - support `perl -Modern::Perl=20xx` (RT #96319)
 
 1.20181021 2018-10-21 12:09:32-07:00 America/Los_Angeles
     - autogenerate META.json file (Mohammad S Anwar, GH PR #7)
