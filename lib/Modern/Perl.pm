@@ -14,19 +14,18 @@ use IO::File   ();
 use IO::Handle ();
 
 my $wanted_date;
-sub VERSION
-{
+
+sub VERSION {
     my ($self, $version) = @_;
 
-    return $Modern::Perl::VERSION || 2018 unless defined $version;
-    return $Modern::Perl::VERSION || 2018 if             $version < 2009;
+    return $Modern::Perl::VERSION || 2019 unless defined $version;
+    return $Modern::Perl::VERSION || 2019 if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
-    return 2018;
+    return 2019;
 }
 
-sub import
-{
+sub import {
     my ($class, $date) = @_;
     $date = $wanted_date unless defined $date;
 
@@ -166,7 +165,7 @@ chromatic, C<< <chromatic at wgz.org> >>
 
 =head1 BUGS
 
-None reported.
+None known.
 
 Please report any bugs or feature requests to C<bug-modern-perl at
 rt.cpan.org>, or through the web interface at
