@@ -38,35 +38,31 @@ sub import {
     mro::set_mro( scalar caller(), 'c3' );
 }
 
-sub unimport
-{
+sub unimport {
     warnings->unimport;
     strict->unimport;
     feature->unimport;
 }
 
-my %dates =
-(
-    2009 => ':5.10',
-    2010 => ':5.10',
-    2011 => ':5.12',
-    2012 => ':5.14',
-    2013 => ':5.16',
-    2014 => ':5.18',
-    2015 => ':5.20',
-    2016 => ':5.24',
-    2017 => ':5.24',
-    2018 => ':5.26',
-    2019 => ':5.28',
-);
+sub validate_date {
+    my %dates = (
+        2009 => ':5.10',
+        2010 => ':5.10',
+        2011 => ':5.12',
+        2012 => ':5.14',
+        2013 => ':5.16',
+        2014 => ':5.18',
+        2015 => ':5.20',
+        2016 => ':5.24',
+        2017 => ':5.24',
+        2018 => ':5.26',
+        2019 => ':5.28',
+    );
 
-sub validate_date
-{
     my $date = shift;
 
     # always enable unicode_strings when available
-    unless ($date)
-    {
+    unless ($date) {
         return ':5.12' if $] > 5.011003;
         return ':5.10';
     }
