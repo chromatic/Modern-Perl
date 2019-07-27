@@ -1,6 +1,7 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - remove explicit autodie dependency (GH #11, gordon-fish, mst, #perl)
 
 1.20190601 2019-06-01 09:19:36-07:00 America/Los_Angeles
     - update for 2019
