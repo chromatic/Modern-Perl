@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20190727 2019-07-27 12:15:27-07:00 America/Los_Angeles
     - remove explicit autodie dependency (GH #11, gordon-fish, mst, #perl)
     - add description of odern::Perl module (Utkarsh Gupta, Debian, GH issue #12)
 
