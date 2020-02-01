@@ -92,7 +92,7 @@ is uc "\xdf", "\xdf", 'unicode_strings feature does not leak out';
     $Modern::Perl::VERSION ||= '1.20121103';
 
     my   $version            = Modern::Perl->VERSION;
-    like $version, qr/1\.201\d/,
+    like $version, qr/1\.20\d/,
         'VERSION() should return version number, given no argument';
     is $warning, '', '... without warning about undef argument';
 }

@@ -262,6 +262,21 @@ if ($] >= 5.028)
     test_unicode_strings_for( $year );
 }
 
+if ($] >= 5.030)
+{
+    my $year = 2020;
+
+    test_switch_for(          $year );
+    test_say_for(             $year );
+    test_state_for(           $year );
+    test_cur_sub_for(         $year );
+    test_array_base_for(      $year );
+    test_lexical_subs_for(    $year );
+    test_fc_for(              $year );
+    test_postderef_for(       $year );
+    test_unicode_strings_for( $year );
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, "", 'switch feature does not leak out';
 eval 'sub { say 0 }';
