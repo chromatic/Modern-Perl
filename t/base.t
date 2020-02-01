@@ -4,12 +4,12 @@ use Test::More 0.98;
 
 BEGIN
 {
-    local $INC{'IO/File.pm'};
-    local $INC{'IO/Handle.pm'};
+    delete $INC{'IO/File.pm'};
+    delete $INC{'IO/Handle.pm'};
 
     use_ok( 'Modern::Perl' ) or exit;
-    ok exists $INC{'IO/File.pm'},   'M::P should load IO::File';
-    ok exists $INC{'IO/Handle.pm'}, 'M::P should load IO::Handle';
+    ok $INC{'IO/File.pm'},   'M::P should load IO::File';
+    ok $INC{'IO/Handle.pm'}, 'M::P should load IO::Handle';
 
     Modern::Perl->import();
 }
