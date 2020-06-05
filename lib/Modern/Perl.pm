@@ -163,6 +163,14 @@ I<year> value as the single optional import tag. For example:
 
 ... enables 5.26 features.
 
+    use Modern::Perl '2019';
+    
+... enables 5.28 features.
+
+    use Modern::Perl '2020';
+
+... enables 5.30 features.
+
 Obviously you cannot use newer features on earlier
 versions. Perl will throw the appropriate exception if you try.
 
