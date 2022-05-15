@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20220515 2022-05-15 11:15:25-07:00 America/Los_Angeles
     - enable signatures in 2022 year bundle
     - add 2021 and 2022 year bundles
 
