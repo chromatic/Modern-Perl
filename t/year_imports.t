@@ -100,6 +100,21 @@ sub test_unicode_strings_for {
     };
 }
 
+sub test_signatures_for {
+    my $year = _get_year(shift);
+
+    my @narnings;
+    local $SIG{__WARN__} = sub { push @warnings, @_ };
+
+    local $@;
+    eval qq{
+        use Modern::Perl $year;
+        sub foo( $bar ) { ... }
+    };
+    is $@, '', q|$year enables signatures|;
+    is @warnings, 0, '... and disables signature warnings';
+}
+
 eval 'sub { given (0) {} }';
 isnt $@, '', 'use Modern::Perl () does not enable switch';
 
@@ -275,6 +290,37 @@ if ($] >= 5.030)
     test_fc_for(              $year );
     test_postderef_for(       $year );
     test_unicode_strings_for( $year );
+}
+
+if ($] >= 5.032)
+{
+    my $year = 2021;
+
+    test_switch_for(          $year );
+    test_say_for(             $year );
+    test_state_for(           $year );
+    test_cur_sub_for(         $year );
+    test_array_base_for(      $year );
+    test_lexical_subs_for(    $year );
+    test_fc_for(              $year );
+    test_postderef_for(       $year );
+    test_unicode_strings_for( $year );
+}
+
+if ($] >= 5.034)
+{
+    my $year = 2022;
+
+    test_switch_for(          $year );
+    test_say_for(             $year );
+    test_state_for(           $year );
+    test_cur_sub_for(         $year );
+    test_array_base_for(      $year );
+    test_lexical_subs_for(    $year );
+    test_fc_for(              $year );
+    test_postderef_for(       $year );
+    test_unicode_strings_for( $year );
+    test_signatures_for(      $year );
 }
 
 eval 'sub { given (0) {} }';

@@ -18,11 +18,11 @@ my $wanted_date;
 sub VERSION {
     my ($self, $version) = @_;
 
-    return $Modern::Perl::VERSION || 2020 unless defined $version;
-    return $Modern::Perl::VERSION || 2020 if             $version < 2009;
+    return $Modern::Perl::VERSION || 2022 unless defined $version;
+    return $Modern::Perl::VERSION || 2022 if             $version < 2009;
 
     $wanted_date = $version if (caller(1))[3] =~ /::BEGIN/;
-    return 2020;
+    return 2022;
 }
 
 sub import {
@@ -35,6 +35,12 @@ sub import {
     warnings->import;
     strict->import;
     feature->import( $feature_tag );
+
+    if ($feature_tag ge ':5.34') {
+        feature->import( 'signatures' );
+        warnings->unimport( 'experimental::signatures' );
+    }
+
     mro::set_mro( scalar caller(), 'c3' );
 }
 
@@ -58,6 +64,8 @@ sub validate_date {
         2018 => ':5.26',
         2019 => ':5.28',
         2020 => ':5.30',
+        2021 => ':5.32',
+        2022 => ':5.34',
     );
 
     my $date = shift;
@@ -162,6 +170,22 @@ I<year> value as the single optional import tag. For example:
     use Modern::Perl '2018';
 
 ... enables 5.26 features.
+
+    use Modern::Perl '2019';
+
+... enables 5.28 features.
+
+    use Modern::Perl '2020';
+
+... enables 5.30 features.
+
+    use Modern::Perl '2021';
+
+... enables 5.32 features.
+
+    use Modern::Perl '2022';
+
+... enables 5.34 features.
 
 Obviously you cannot use newer features on earlier
 versions. Perl will throw the appropriate exception if you try.

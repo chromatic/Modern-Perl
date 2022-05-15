@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - enable signatures in 2022 year bundle
+    - add 2021 and 2022 year bundles
 
 1.20200211 2020-02-10 19:33:55-08:00 America/Los_Angeles
     - bash doesn't like !' in double quotes, so it stuck up for awk
