@@ -103,15 +103,16 @@ sub test_unicode_strings_for {
 sub test_signatures_for {
     my $year = _get_year(shift);
 
-    my @narnings;
+    my @warnings;
     local $SIG{__WARN__} = sub { push @warnings, @_ };
 
     local $@;
+    my ($yearnum) = $year =~ m/(\d+)/;
     eval qq{
         use Modern::Perl $year;
-        sub foo( $bar ) { ... }
+        sub foo_$yearnum( \$bar ) { ... }
     };
-    is $@, '', q|$year enables signatures|;
+    is $@, '', qq|$year enables signatures|;
     is @warnings, 0, '... and disables signature warnings';
 }
 
