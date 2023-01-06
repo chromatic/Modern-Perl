@@ -40,6 +40,41 @@ sub test_switch_for {
     is $@, '', qq|use Modern::Perl $year enables switch|;
 }
 
+sub test_no_switch_for {
+    my $year = _get_year(shift);
+
+    eval qq|use Modern::Perl $year; sub { given (0) {} }|;
+    isnt $@, '', qq|use Modern::Perl $year does not enable switch|;
+}
+
+sub test_no_indirect_for {
+    my $year = _get_year(shift);
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq|use Modern::Perl $year; my \$foo = new Modern::Perl;|;
+    like $@, qr/syntax error.+near "new Modern::Perl"/,
+        qq|use Modern::Perl $year disables indirect method calls|;
+}
+
+sub test_no_multidimensional_for {
+    my $year = _get_year(shift);
+
+    my $warning = '';
+    local $SIG{__WARN__} = sub { $warning = shift };
+
+    eval qq{
+        use Modern::Perl $year;
+        my (\$x, \$y) = (1, 2);
+        my %foo;
+
+        \$foo{\$x, \$y} = 'bar';
+    };
+    like $@, qr/Multidimensional hash lookup is disabled/,
+        qq|use Modern::Perl $year disables multidimensional array emulation|;
+}
+
 sub test_say_for {
     my $year = _get_year(shift);
 
@@ -96,7 +131,7 @@ sub test_unicode_strings_for {
 
     eval qq{
         use Modern::Perl $year;
-        is uc "\xdf", "SS", q|$year enables unicode_strings|;
+        is uc "\xdf", "SS", q|use Modern::Perl $year enables unicode_strings|;
     };
 }
 
@@ -112,8 +147,35 @@ sub test_signatures_for {
         use Modern::Perl $year;
         sub foo_$yearnum( \$bar ) { ... }
     };
-    is $@, '', qq|$year enables signatures|;
+    is $@, '', qq|use Modern::Perl $year enables signatures|;
     is @warnings, 0, '... and disables signature warnings';
+}
+
+sub test_isa_for {
+    my $year = _get_year(shift);
+
+    eval qq{
+        use Modern::Perl $year;
+        my \$foo = bless {}, 'Some::Class';
+        my \$result = \$foo isa 'Some::Class';
+    };
+    is $@, '', qq|use Modern::Perl $year enables isa|;
+}
+
+sub test_warnings_for {
+    my $year = _get_year(shift);
+
+    my $warnings;
+
+    local $SIG{__WARN__} = sub { $warnings = shift };
+
+    eval qq{
+        no warnings;
+        use Modern::Perl $year;
+        my \$x = "2:" + 3;
+    };
+
+    like $warnings, qr/Argument "2:" isn't numeric/, qq|use Modern::Perl $year enables warnings|;
 }
 
 eval 'sub { given (0) {} }';
@@ -143,7 +205,7 @@ is $@, '', q|use Modern::Perl '2013' does not enable current_sub|;
     test_say_for(    '2009' );
     test_state_for(  '2009' );
 
-    is uc "\xdf", "\xdf", 'but not unicode_strings';
+    is uc "\xdf", "\xdf", q|use Modern::Perl '2009' does not enable unicode_strings|;
 }
 
 {
@@ -153,7 +215,7 @@ is $@, '', q|use Modern::Perl '2013' does not enable current_sub|;
     test_say_for(    '2010' );
     test_state_for(  '2010' );
 
-    is uc "\xdf", "\xdf", 'but not unicode_strings';
+    is uc "\xdf", "\xdf", q|use Modern::Perl '2010' does not enable unicode_strings|;
 }
 
 if ($] >= 5.012)
@@ -322,6 +384,27 @@ if ($] >= 5.034)
     test_postderef_for(       $year );
     test_unicode_strings_for( $year );
     test_signatures_for(      $year );
+}
+
+if ($] >= 5.036)
+{
+    my $year = 2023;
+
+    test_no_switch_for(           $year );
+    test_no_indirect_for(         $year );
+    test_no_multidimensional_for( $year );
+
+    test_say_for(             $year );
+    test_state_for(           $year );
+    test_cur_sub_for(         $year );
+    test_array_base_for(      $year );
+    test_lexical_subs_for(    $year );
+    test_fc_for(              $year );
+    test_postderef_for(       $year );
+    test_unicode_strings_for( $year );
+    test_signatures_for(      $year );
+    test_isa_for(             $year );
+    test_warnings_for(        $year );
 }
 
 eval 'sub { given (0) {} }';

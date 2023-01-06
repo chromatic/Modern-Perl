@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+    - update for 2023 year bundle
+    - fix a few nits in tests
 
 1.20220515 2022-05-15 11:15:25-07:00 America/Los_Angeles
     - enable signatures in 2022 year bundle
