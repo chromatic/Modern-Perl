@@ -1,6 +1,8 @@
 Revision history for Modern::Perl
 
 {{$NEXT}}
+
+1.20230106 2023-01-05 17:15:46-08:00 America/Los_Angeles
     - update for 2023 year bundle
     - fix a few nits in tests
 
