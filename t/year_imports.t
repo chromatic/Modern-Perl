@@ -3,6 +3,8 @@
 use Test::More 0.98;
 
 use Modern::Perl ();
+use Cwd;
+use File::Spec;
 
 if ($ENV{PERL5OPT}) {
     plan( skip_all => "Cannot reliably test with PERL5OPT set" );
@@ -14,7 +16,7 @@ $SIG{__WARN__} = sub
     return if $_[0] =~ /Number found where operator expected/;
     return if $_[0] =~ /Do you need to predeclare/;
     return if $_[0] =~ /future reserved word/;
-    return if $_[0] =~ /given is experimental/;
+    return if $_[0] =~ /given is (experimental|deprecated)/;
     warn shift
 };
 
@@ -176,6 +178,40 @@ sub test_warnings_for {
     };
 
     like $warnings, qr/Argument "2:" isn't numeric/, qq|use Modern::Perl $year enables warnings|;
+}
+
+sub test_module_true_for {
+    my $year   = _get_year(shift);
+    my $cwd    = Cwd::cwd();
+    my $tmpdir = File::Spec->tmpdir;
+
+    chdir $tmpdir;
+
+    open my $fh, '>', 'Foo.pm'
+        or die "Cannot write 'Foo.pm': $!\n";
+    $fh->print(<<~EOF);
+    package Foo;
+
+    use Modern::Perl $year;
+
+    sub bar { 'returned from Foo::bar()' }
+
+    return 0;
+    EOF
+    close $fh;
+
+    local @INC = '.';
+
+    my $result;
+    eval qq{
+        use Foo;
+        \$result = Foo->bar;
+    };
+
+    is $result, 'returned from Foo::bar()',
+        qq|use Modern::Perl $year enables module_true|;
+
+    chdir $cwd;
 }
 
 eval 'sub { given (0) {} }';
@@ -405,6 +441,28 @@ if ($] >= 5.036)
     test_signatures_for(      $year );
     test_isa_for(             $year );
     test_warnings_for(        $year );
+}
+
+if ($] >= 5.038)
+{
+    my $year = 2024;
+
+    test_no_switch_for(           $year );
+    test_no_indirect_for(         $year );
+    test_no_multidimensional_for( $year );
+
+    test_say_for(             $year );
+    test_state_for(           $year );
+    test_cur_sub_for(         $year );
+    test_array_base_for(      $year );
+    test_lexical_subs_for(    $year );
+    test_fc_for(              $year );
+    test_postderef_for(       $year );
+    test_unicode_strings_for( $year );
+    test_signatures_for(      $year );
+    test_isa_for(             $year );
+    test_warnings_for(        $year );
+    test_module_true_for(     $year );
 }
 
 eval 'sub { given (0) {} }';

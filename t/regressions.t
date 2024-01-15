@@ -14,7 +14,7 @@ $SIG{__WARN__} = sub
     return if $_[0] =~ /Number found where operator expected/;
     return if $_[0] =~ /Do you need to predeclare/;
     return if $_[0] =~ /future reserved word/;
-    return if $_[0] =~ /given is experimental/;
+    return if $_[0] =~ /given is (experimental|deprecated)/;
     warn shift
 };
 

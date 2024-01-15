@@ -18,7 +18,7 @@ my $wanted_date;
 sub VERSION {
     my ($self, $version) = @_;
 
-    my $default = 2023;
+    my $default = 2024;
 
     return $Modern::Perl::VERSION || $default unless defined $version;
     return $Modern::Perl::VERSION || $default if             $version < 2009;
@@ -42,6 +42,10 @@ sub import {
     if ($feature_tag ge ':5.34') {
         feature->import( 'signatures' );
         warnings->unimport( 'experimental::signatures' );
+    }
+
+    if ($feature_tag ge ':5.38') {
+        feature->import( 'module_true' );
     }
 
     mro::set_mro( scalar caller(), 'c3' );
@@ -70,6 +74,7 @@ sub validate_date {
         2021 => ':5.32',
         2022 => ':5.34',
         2023 => ':5.36',
+        2024 => ':5.38',
     );
 
     my $date = shift;
@@ -195,8 +200,17 @@ I<year> value as the single optional import tag. For example:
 
 ... enables 5.36 features.
 
-Obviously you cannot use newer features on earlier
-versions. Perl will throw the appropriate exception if you try.
+    use Modern::Perl '2024';
+
+... enables 5.38 features.
+
+Obviously you cannot use newer features on earlier versions. Perl will throw
+the appropriate exception if you try.
+
+As of Perl 5.38, you may prefer to write C<use v5.38>, which is almost entirely
+equivalent to the use of this module. For the purpose of forward compatibility,
+this module will continue to work as expected--and will continue regular
+maintenance.
 
 =head1 AUTHOR
 
