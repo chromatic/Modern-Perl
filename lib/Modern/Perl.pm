@@ -27,6 +27,11 @@ sub VERSION {
     return $default;
 }
 
+my $unimport_tag;
+BEGIN {
+    $unimport_tag = $] > 5.015 ? ':all' : ':5.10';
+}
+
 sub import {
     my ($class, $date) = @_;
     $date = $wanted_date unless defined $date;
@@ -36,7 +41,7 @@ sub import {
 
     warnings->import;
     strict->import;
-    feature->unimport( ':all' );
+    feature->unimport( $unimport_tag );
     feature->import( $feature_tag );
 
     if ($feature_tag ge ':5.34') {

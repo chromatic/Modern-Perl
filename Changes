@@ -2,6 +2,7 @@ Revision history for Modern::Perl
 
 {{$NEXT}}
     - fix tests for Perl < 5.26.0 (RT #151198, Slaven Rezic)
+    - fix feature reset for Perl < 5.15 (RT #151190, Slaven Rezic)
 
 1.20240115 2024-01-14 17:47:22-08:00 America/Los_Angeles
     - update for 2024 year bundle
