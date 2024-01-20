@@ -189,15 +189,19 @@ sub test_module_true_for {
 
     open my $fh, '>', 'Foo.pm'
         or die "Cannot write 'Foo.pm': $!\n";
-    $fh->print(<<~EOF);
-    package Foo;
 
-    use Modern::Perl $year;
+    # don't use <<~ heredoc to trim whitespace
+    # as this will fail with Perl < 5.26
+    # see RT #151189
+    $fh->print(<<EOF);
+package Foo;
 
-    sub bar { 'returned from Foo::bar()' }
+use Modern::Perl $year;
 
-    return 0;
-    EOF
+sub bar { 'returned from Foo::bar()' }
+
+return 0;
+EOF
     close $fh;
 
     local @INC = '.';

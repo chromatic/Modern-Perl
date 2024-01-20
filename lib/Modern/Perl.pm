@@ -260,8 +260,8 @@ Damian Conway (inspiration from L<Toolkit>), Florian Ragwitz
 (L<B::Hooks::Parser>, so I didn't have to write it myself), chocolateboy (for
 suggesting that I don't even need L<B::Hooks::Parser>), Damien Learns Perl,
 David Moreno, Evan Carroll, Elliot Shank, Andreas König, Father Chrysostomos,
-Gryphon Shafer, and Norbert E. Grüner for reporting bugs, filing patches, and
-requesting features.
+Gryphon Shafer, Norbert E. Grüner, and Slaven Rezic for reporting bugs, filing
+patches, and requesting features.
 
 =cut
 
