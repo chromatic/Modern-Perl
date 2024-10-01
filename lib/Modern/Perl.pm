@@ -217,6 +217,9 @@ equivalent to the use of this module. For the purpose of forward compatibility,
 this module will continue to work as expected--and will continue regular
 maintenance.
 
+As of Perl 5.41.4, C<given> is no longer available, so any import tags for
+older versions of Perl will not enable this feature, no matter how much you try.
+
 =head1 AUTHOR
 
 chromatic, C<< <chromatic at wgz.org> >>

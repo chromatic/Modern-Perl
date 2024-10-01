@@ -26,11 +26,17 @@ eval 'state $x;';
 isnt $@, '', 'use Modern::Perl () does not enable state';
 is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
 
+sub test_switch {
+    my $version = shift;
+    return if $] >= 5.041004;
+    eval "use Modern::Perl $version; sub { given (0) {} }";
+    is $@, '', qq|use Modern::Perl $version enables switch|;
+}
+
 {
     use Modern::Perl 2009;
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl 2009 enables switch|;
     eval 'sub { say 0 }';
+    test_switch(2009);
     is $@, '', q|use Modern::Perl 2009 enables say|;
     eval 'state $x';
     is $@, '', q|use Modern::Perl 2009 enables state|;
@@ -39,8 +45,7 @@ is uc "\xdf", "\xdf", 'Modern::Perl () does not enable unicode_strings';
 
 {
     use Modern::Perl 2010;
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl 2010 enables switch|;
+    test_switch(2010);
     eval 'sub { say 0 }';
     is $@, '', q|use Modern::Perl 2010 enables say|;
     eval 'state $x';
@@ -52,8 +57,7 @@ if ($] >= 5.012)
 {
     eval <<'END_HERE';
     use Modern::Perl 2011;
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl 2011 enables switch|;
+    test_switch(2011);
     eval 'sub { say 0 }';
     is $@, '', q|use Modern::Perl 2011 enables say|;
     eval 'state $x';
@@ -66,8 +70,7 @@ if ($] >= 5.014)
 {
     eval <<'END_HERE';
     use Modern::Perl 2012;
-    eval 'sub { given (0) {} }';
-    is $@, '', q|use Modern::Perl 2012 enables switch|;
+    test_switch(2012);
     eval 'sub { say 0 }';
     is $@, '', q|use Modern::Perl 2012 enables say|;
     eval 'state $x';

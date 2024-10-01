@@ -36,6 +36,9 @@ sub test_lexical_subs_for
 }
 
 sub test_switch_for {
+    # given removed in 5.41.4
+    return if $] >= 5.041004;
+
     my $year = _get_year(shift);
 
     eval qq|use Modern::Perl $year; sub { given (0) {} }|;
@@ -43,6 +46,9 @@ sub test_switch_for {
 }
 
 sub test_no_switch_for {
+    # given removed in 5.41.4
+    return if $] >= 5.041004;
+
     my $year = _get_year(shift);
 
     eval qq|use Modern::Perl $year; sub { given (0) {} }|;
